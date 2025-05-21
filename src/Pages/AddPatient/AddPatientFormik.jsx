@@ -53,12 +53,8 @@ const AddPatientFormik = () => {
       disorders: selectedDisorders,
     };
 
-<<<<<<< HEAD:src/Pages/AddPatient/AddPatientFormik.jsx
     setSubmittedData(finalData);
-=======
-    setSubmittedData(finalData); 
->>>>>>> 1f79c10e4b83e0cf8f2a7728404610da2dc5deef:src/Pages/Patient/AddPatientFormik.jsx
-  };
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -84,11 +80,6 @@ const AddPatientFormik = () => {
               </Grid>
             </Form>
           </Formik>
-
-<<<<<<< HEAD:src/Pages/AddPatient/AddPatientFormik.jsx
-=======
-       
->>>>>>> 1f79c10e4b83e0cf8f2a7728404610da2dc5deef:src/Pages/Patient/AddPatientFormik.jsx
           {submittedData && (
             <Box mt={4}>
               <Alert severity="info">
@@ -104,5 +95,5 @@ const AddPatientFormik = () => {
     </ThemeProvider>
   );
 };
-
+}
 export default AddPatientFormik;
