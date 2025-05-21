@@ -1,13 +1,12 @@
-import React from "react";
-import { Grid, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
+import { StyledGridItem, StyledTextField } from "./DateOfBirthField.styled";
 
 const DateOfBirthField = () => {
   const { values, errors, touched, handleChange } = useFormikContext();
 
   return (
-    <Grid item xs={12} sm={6}>
-      <TextField
+    <StyledGridItem item xs={12} sm={6}>
+      <StyledTextField
         fullWidth
         type="date"
         label="Date of birth"
@@ -18,7 +17,7 @@ const DateOfBirthField = () => {
         error={touched.dateOfBirth && Boolean(errors.dateOfBirth)}
         helperText={touched.dateOfBirth && errors.dateOfBirth}
       />
-    </Grid>
+    </StyledGridItem>
   );
 };
 

@@ -1,22 +1,22 @@
-import { Box, Grid, TextField, MenuItem, Button } from "@mui/material";
+import { MenuItem } from "@mui/material";
+import { StyledBox, StyledTextField } from "./TemplateForm.styled";
 
 const TemplateForm = ({ register, errors }) => {
   return (
-    <Box sx={{ width: 300 }} >
-      <TextField
+    <StyledBox>
+      <StyledTextField
         select
         fullWidth
         label="Workspace Template"
-        {...register("template")}
+        {...register("template", { required: "Please select a template" })}
         error={!!errors.template}
         helperText={errors.template?.message}
-        sx={{ mb: 2 }}
       >
         <MenuItem value="">Select</MenuItem>
         <MenuItem value="templateA">Template A</MenuItem>
         <MenuItem value="templateB">Template B</MenuItem>
-      </TextField>
-    </Box>
+      </StyledTextField>
+    </StyledBox>
   );
 };
 

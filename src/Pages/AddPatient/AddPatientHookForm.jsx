@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
-  CssBaseline,
   Paper,
   Typography,
   Box,
@@ -9,14 +8,13 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { patientSchema } from "../../Components/patientSchema";
-import FirstLastNameFields from "../../Components/HookComponents/FirstLastNameFields";
-import GenderField from "../../Components/HookComponents/GenderField";
-import DateOfBirthField from "../../Components/HookComponents/DateOfBirthField";
-import DisordersField from "../../Components/HookComponents/DisordersField";
-import TemplateField from "../../Components/HookComponents/TemplateField";
-import FormButtons from "../../Components/HookComponents/FormButtons";
+import FirstLastNameFields from "../../Components/HookComponents/FirstLastName/FirstLastNameFields";
+import GenderField from "../../Components/HookComponents/Gender/GenderField";
+import DateOfBirthField from "../../Components/HookComponents/DateOfBirth/DateOfBirthField";
+import DisordersField from "../../Components/HookComponents/DisordersField/DisordersField";
+import TemplateField from "../../Components/HookComponents/TemplateField/TemplateField";
+import FormButtons from "../../Components/HookComponents/FormButtons/FormButtons";
+
 const theme = createTheme({
   palette: {
     primary: { main: "#a11925" },
@@ -30,8 +28,8 @@ const theme = createTheme({
   },
 });
 
-export default function AddPatientFormHook() {
-  const [submittedData, setSubmittedData] = useState(null);
+const AddPatientFormHook = () => {
+  const navigate = useNavigate();
 
   const {
     register,
@@ -39,21 +37,46 @@ export default function AddPatientFormHook() {
     formState: { errors },
     control,
     watch,
+    setError,
+    clearErrors,
+    reset,
   } = useForm({
-    resolver: yupResolver(patientSchema),
     defaultValues: {
       disorders: {},
     },
   });
 
   const onSubmit = (data) => {
-    const selectedDisorders = Object.entries(data.disorders || {})
+    const watchedDisorders = watch("disorders") || {};
+
+    const selectedDisorders = Object.entries(watchedDisorders)
       .filter(([, value]) => value)
       .map(([key]) => key);
-    const result = { ...data, disorders: selectedDisorders };
 
-    setSubmittedData(result);
-    console.log(result);
+    if (selectedDisorders.length === 0) {
+      setError("disorders", {
+        type: "manual",
+        message: "Please select at least one disorder",
+      });
+      return;
+    } else {
+      clearErrors("disorders");
+    }
+
+    const newPatient = { ...data, disorders: selectedDisorders };
+
+  
+    const savedPatients = localStorage.getItem("patients");
+    const patients = savedPatients ? JSON.parse(savedPatients) : [];
+
+    const updatedPatients = [...patients, newPatient];
+
+
+    localStorage.setItem("patients", JSON.stringify(updatedPatients));
+
+  
+    reset();
+    navigate("/patients");
   };
 
   return (
@@ -73,16 +96,10 @@ export default function AddPatientFormHook() {
               <FormButtons />
             </Grid>
           </Box>
-
-  
-          {submittedData && (
-            <Box sx={{ mt: 4, whiteSpace: "pre-wrap", bgcolor: "#f5f5f5", p: 2, borderRadius: 2 }}>
-              <Typography variant="h6">Submitted Data:</Typography>
-              <Typography component="pre">{JSON.stringify(submittedData, null, 2)}</Typography>
-            </Box>
-          )}
         </Paper>
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default AddPatientFormHook;

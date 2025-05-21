@@ -1,14 +1,13 @@
-import React from "react";
-import { Grid, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
+import { StyledGridItem, StyledTextField } from "./FirstLastNameFields.styled";
 
 const FirstLastNameFields = () => {
   const { values, errors, touched, handleChange } = useFormikContext();
 
   return (
     <>
-      <Grid item xs={12} sm={6}>
-        <TextField
+      <StyledGridItem item xs={12} sm={6}>
+        <StyledTextField
           fullWidth
           label="First name"
           name="firstName"
@@ -17,9 +16,9 @@ const FirstLastNameFields = () => {
           error={touched.firstName && Boolean(errors.firstName)}
           helperText={touched.firstName && errors.firstName}
         />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <TextField
+      </StyledGridItem>
+      <StyledGridItem item xs={12} sm={6}>
+        <StyledTextField
           fullWidth
           label="Last name"
           name="lastName"
@@ -28,7 +27,7 @@ const FirstLastNameFields = () => {
           error={touched.lastName && Boolean(errors.lastName)}
           helperText={touched.lastName && errors.lastName}
         />
-      </Grid>
+      </StyledGridItem>
     </>
   );
 };

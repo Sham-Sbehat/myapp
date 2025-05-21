@@ -1,26 +1,26 @@
-import { Grid, TextField } from "@mui/material";
+import { StyledGridItem, StyledTextField } from "./FirstLastNameFields.styled";
 
 const FirstLastNameFields = ({ register, errors }) => {
   return (
     <>
-      <Grid item xs={12} sm={6}>
-        <TextField
+      <StyledGridItem item xs={12} sm={6}>
+        <StyledTextField
           fullWidth
           label="First Name"
-          {...register("firstName")}
+          {...register("firstName", { required: "First Name is required" })}
           error={!!errors.firstName}
           helperText={errors.firstName?.message}
         />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <TextField
+      </StyledGridItem>
+      <StyledGridItem item xs={12} sm={6}>
+        <StyledTextField
           fullWidth
           label="Last Name"
-          {...register("lastName")}
+          {...register("lastName", { required: "Last Name is required" })}
           error={!!errors.lastName}
           helperText={errors.lastName?.message}
         />
-      </Grid>
+      </StyledGridItem>
     </>
   );
 };

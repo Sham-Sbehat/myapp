@@ -1,13 +1,13 @@
-import React from "react";
-import { Grid, TextField, MenuItem } from "@mui/material";
+import { MenuItem } from "@mui/material";
 import { useFormikContext } from "formik";
+import { StyledGridItem, StyledTextField } from "./TemplateField.styled";
 
 const TemplateField = () => {
   const { values, handleChange, errors, touched } = useFormikContext();
 
   return (
-    <Grid item xs={12} sx={{width: "30%" }}  >
-      <TextField
+    <StyledGridItem xs={12}>
+      <StyledTextField
         select
         fullWidth
         label="Workspace template"
@@ -20,8 +20,8 @@ const TemplateField = () => {
         <MenuItem value="">Select</MenuItem>
         <MenuItem value="templateA">Template A</MenuItem>
         <MenuItem value="templateB">Template B</MenuItem>
-      </TextField>
-    </Grid>
+      </StyledTextField>
+    </StyledGridItem>
   );
 };
 

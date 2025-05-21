@@ -10,13 +10,13 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { Formik, Form } from "formik";
-import { patientSchema } from "../../Components/patientSchema";
-import FirstLastNameFields from "../../Components/FormikComponents/FirstLastNameFields";
-import GenderField from "../../Components/FormikComponents/GenderFieldFormik";
-import DateOfBirthField from "../../Components/FormikComponents/DateOfBirth";
-import DisordersField from "../../Components/FormikComponents/DisordersField";
-import TemplateField from "../../Components/FormikComponents/TemplateFieldFormik";
-import FormButtons from "../../Components/FormikComponents/FormButtonsFormik";
+import { patientSchema } from "../../Components/FormikComponents/patientSchema";
+import FirstLastNameFields from "../../Components/FormikComponents/FisrtLastName/FirstLastNameFields";
+import GenderField from "../../Components/FormikComponents/Gender/GenderFieldFormik";
+import DateOfBirthField from "../../Components/FormikComponents/DataOfBitrh/DateOfBirth";
+import DisordersField from "../../Components/FormikComponents/Disorders/DisordersField";
+import TemplateField from "../../Components/FormikComponents/TemplateField/TemplateFieldFormik";
+import FormButtons from "../../Components/FormikComponents/FormButtons/FormButtonsFormik";
 
 const theme = createTheme({
   palette: {
@@ -53,7 +53,7 @@ const AddPatientFormik = () => {
       disorders: selectedDisorders,
     };
 
-    setSubmittedData(finalData); 
+    setSubmittedData(finalData);
   };
 
   return (
@@ -81,7 +81,6 @@ const AddPatientFormik = () => {
             </Form>
           </Formik>
 
-    
           {submittedData && (
             <Box mt={4}>
               <Alert severity="info">

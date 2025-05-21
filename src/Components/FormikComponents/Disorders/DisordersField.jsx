@@ -1,13 +1,12 @@
-import React from "react";
-import {
-  Grid,
-  FormLabel,
-  Box,
-  Checkbox,
-  Typography,
-  FormHelperText,
-} from "@mui/material";
+import { Checkbox, Typography } from "@mui/material";
 import { useFormikContext } from "formik";
+import {
+  StyledGridItem,
+  StyledFormLabel,
+  StyledBoxContainer,
+  StyledDisorderBox,
+  StyledFormHelperText,
+} from "./DisordersField.styled";
 
 const disorderOptions = [
   "PD",
@@ -28,28 +27,15 @@ const DisordersField = () => {
   };
 
   return (
-    <Grid item xs={12}>
-      <FormLabel component="legend" sx={{ color: "#a11925", mb: 1 }}>
-        Disorders
-      </FormLabel>
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+    <StyledGridItem item xs={12}>
+      <StyledFormLabel component="legend">Disorders</StyledFormLabel>
+      <StyledBoxContainer>
         {disorderOptions.map((option) => {
           const checked = !!values.disorders?.[option];
           return (
-            <Box
+            <StyledDisorderBox
               key={option}
-              sx={{
-                width: 100,
-                height: 40,
-                border: checked ? "2px solid #a11925" : "1px solid #ccc",
-                borderRadius: "6px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                paddingLeft: "8px",
-                backgroundColor: checked ? "#fcebec" : "transparent",
-                cursor: "pointer",
-              }}
+              checked={checked ? 1 : 0}
               onClick={() =>
                 setFieldValue(`disorders.${option}`, !checked)
               }
@@ -67,14 +53,14 @@ const DisordersField = () => {
                 }}
               />
               <Typography variant="body2">{option}</Typography>
-            </Box>
+            </StyledDisorderBox>
           );
         })}
-      </Box>
+      </StyledBoxContainer>
       {touched.disorders && typeof errors.disorders === "string" && (
-        <FormHelperText error>{errors.disorders}</FormHelperText>
+        <StyledFormHelperText>{errors.disorders}</StyledFormHelperText>
       )}
-    </Grid>
+    </StyledGridItem>
   );
 };
 
