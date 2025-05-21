@@ -53,7 +53,7 @@ const AddPatientFormik = () => {
       disorders: selectedDisorders,
     };
 
-    setSubmittedData(finalData); // تخزين البيانات لعرضها
+    setSubmittedData(finalData); 
   };
 
   return (
@@ -81,7 +81,7 @@ const AddPatientFormik = () => {
             </Form>
           </Formik>
 
-          {/* عرض البيانات المدخلة تحت الفورم */}
+    
           {submittedData && (
             <Box mt={4}>
               <Alert severity="info">
