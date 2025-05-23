@@ -37,7 +37,7 @@ const NotFound = () => {
             mb: 4,
           }}
         >
-          Pagge Not Found!
+          Sorry,Pagge Not Found!!
         </Typography>
         <Typography
           variant="h3"
