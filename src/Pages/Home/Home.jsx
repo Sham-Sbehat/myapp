@@ -126,7 +126,7 @@ const Home = () => {
               minWidth: "180px",
             }}
           >
-            Left & Right
+            Left & Right Forms
           </Button>
         </Box>
       </Paper>
