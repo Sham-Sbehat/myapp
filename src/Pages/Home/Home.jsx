@@ -90,7 +90,6 @@ const Home = () => {
           >
             React Hook Form
           </Button>
-
           <Button
             variant="outlined"
             onClick={() => navigate("/formik")}
@@ -109,6 +108,25 @@ const Home = () => {
             }}
           >
             Formik
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={() => navigate("/myForms")}
+            sx={{
+              color: "#a11925",
+              borderColor: "#a11925",
+              '&:hover': {
+                backgroundColor: "#f9e6e6",
+                borderColor: "#821a1a",
+              },
+              px: 5,
+              py: 2,
+              fontSize: "1.1rem",
+              borderRadius: 3,
+              minWidth: "180px",
+            }}
+          >
+            Left & Right
           </Button>
         </Box>
       </Paper>

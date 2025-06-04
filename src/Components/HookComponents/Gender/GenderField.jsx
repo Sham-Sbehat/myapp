@@ -5,25 +5,42 @@ import {
   StyledRadioGroup,
   StyledFormControlLabel,
 } from "./GenderField.styled";
-import { FormHelperText, Radio } from "@mui/material";  // هنا أضفت Radio
+import { FormHelperText, Radio } from "@mui/material";
 
-const GenderField = ({ control, errors }) => {
+const GenderField = ({ control, errors, namePrefix = "" }) => {
+  const fullName = namePrefix ? `${namePrefix}.gender` : "gender";
+
   return (
-    <StyledFormControl component="fieldset" error={!!errors.gender} fullWidth>
+    <StyledFormControl
+      component="fieldset"
+      error={!!errors?.[namePrefix]?.gender || !!errors?.gender}
+      fullWidth
+    >
       <StyledFormLabel component="legend">Gender *</StyledFormLabel>
       <Controller
-        name="gender"
+        name={fullName}
         control={control}
         defaultValue=""
         rules={{ required: "Gender is required" }}
         render={({ field }) => (
           <StyledRadioGroup row {...field}>
-            <StyledFormControlLabel value="male" control={<Radio />} label="Male" />
-            <StyledFormControlLabel value="female" control={<Radio />} label="Female" />
+            <StyledFormControlLabel
+              value="male"
+              control={<Radio />}
+              label="Male"
+            />
+            <StyledFormControlLabel
+              value="female"
+              control={<Radio />}
+              label="Female"
+            />
           </StyledRadioGroup>
         )}
       />
-      {errors.gender && (
+      {errors?.[namePrefix]?.gender && (
+        <FormHelperText>{errors[namePrefix].gender.message}</FormHelperText>
+      )}
+      {!namePrefix && errors?.gender && (
         <FormHelperText>{errors.gender.message}</FormHelperText>
       )}
     </StyledFormControl>

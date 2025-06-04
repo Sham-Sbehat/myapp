@@ -2,11 +2,18 @@ import { MenuItem } from "@mui/material";
 import { StyledBox, StyledTextField } from "./TemplateForm.styled";
 import { Controller } from "react-hook-form";
 
-const TemplateField = ({ control, errors, index }) => {
+const TemplateField = ({ control, errors, index, namePrefix = "" }) => {
+  const fullName = namePrefix
+    ? `${namePrefix}[${index}]`
+    : `template[${index}]`;
+  const errorObj = namePrefix
+    ? errors?.[namePrefix]?.[index]
+    : errors?.template?.[index];
+
   return (
     <StyledBox>
       <Controller
-        name={`template[${index}]`}
+        name={fullName}
         control={control}
         defaultValue=""
         rules={{ required: "Please select a template" }}
@@ -17,8 +24,8 @@ const TemplateField = ({ control, errors, index }) => {
             label={`Workspace Template #${index + 1}`}
             value={field.value}
             onChange={field.onChange}
-            error={!!errors?.template?.[index]}
-            helperText={errors?.template?.[index]?.message}
+            error={!!errorObj}
+            helperText={errorObj?.message}
           >
             <MenuItem value="">Select</MenuItem>
             <MenuItem value="templateA">Template A</MenuItem>

@@ -1,6 +1,14 @@
 import { StyledGridItem, StyledTextField } from "./DateOfBirthField.styled";
 
-const DateOfBirthField = ({ register, errors }) => {
+const getError = (errors, name) => {
+  if (!errors) return undefined;
+  return name.split(".").reduce((acc, part) => acc && acc[part], errors);
+};
+
+const DateOfBirthField = ({ register, errors, namePrefix = "" }) => {
+  const fieldName = namePrefix ? `${namePrefix}.dateOfBirth` : "dateOfBirth";
+  const fieldError = getError(errors, fieldName);
+
   return (
     <StyledGridItem item xs={12}>
       <StyledTextField
@@ -8,17 +16,17 @@ const DateOfBirthField = ({ register, errors }) => {
         type="date"
         label="Date of Birth"
         InputLabelProps={{ shrink: true }}
-        {...register("dateOfBirth", {
+        {...register(fieldName, {
           required: "Date of Birth is required",
-          validate: value => {
+          validate: (value) => {
             const selectedDate = new Date(value);
             const today = new Date();
-            today.setHours(0, 0, 0, 0); // عشان نقارن بدون الوقت
+            today.setHours(0, 0, 0, 0);
             return selectedDate <= today || "Date cannot be in the future";
-          }
+          },
         })}
-        error={!!errors.dateOfBirth}
-        helperText={errors.dateOfBirth?.message}
+        error={!!fieldError}
+        helperText={fieldError?.message}
       />
     </StyledGridItem>
   );
